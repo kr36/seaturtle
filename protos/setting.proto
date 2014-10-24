@@ -1,0 +1,98 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+option java_package = "co.kr36.krypton.settings";
+
+package seaturtle.settings;
+
+message State {
+  // TODO this should apply to history, cache, cookies, hsts etc...
+  optional int32 gc_period_days = 1 [default = 30];
+  // Applies to hsts db as well.
+  optional int32 disk_cache_size_mb = 2 [default = 128];
+
+  // TODO. Setting this to false falsifies the two options below for now.
+  // Maybe just get rid of those options?
+  optional bool single_context = 3 [default = true];
+  optional bool persist_cache = 4 [default = true];
+  optional bool allow_persistant_cookies = 5 [default = true];
+}
+
+message WebPreferences {
+  optional bool javascript_enabled = 1 [default = true];
+  optional bool javascript_can_open_windows_automatically = 2 [default = true];
+  optional bool loads_images_automatically = 3 [default = true];
+  optional bool images_enabled = 4 [default = true];
+  optional bool remote_fonts_enabled = 5 [default = true];
+  optional bool dns_prefetching_enabled = 6 [default = true];
+  // TODO using false seems to break sites that use local storage.
+  // In particular scrolling stops working on this site, and some video embeds:
+  // http://time.com/5590/leonardo-dicaprio-drugs/
+  optional bool local_storage_enabled = 7 [default = true];
+  optional bool databases_enabled = 8 [default = false];
+  optional bool application_cache_enabled = 9 [default = false];
+  optional bool webaudio_enabled = 10 [default = true];
+  optional bool experimental_webgl_enabled = 11 [default = true];
+  optional bool accelerated_2d_canvas_enabled = 12 [default = true];
+  optional bool accelerated_filters_enabled = 13 [default = true];
+  optional bool allow_displaying_insecure_content = 14 [default = true];
+  optional bool allow_running_insecure_content = 15 [default = false];
+  optional bool cookie_enabled = 16 [default = true];
+  optional bool user_gesture_required_for_media_playback = 17 [default = false];
+}
+
+message Network {
+  optional bool spdy_enabled = 1 [default = true];
+}
+
+message SslConfig {
+  enum SslVersion {
+    SSL3 = 0;
+    TLS1 = 1;
+    TLS1_1 = 2;
+    TLS1_2 = 3;
+  }
+  // TODO wtf, these don't seem to work
+  optional bool rev_checking_enabled = 1 [default = false];
+  optional bool rev_checking_required_local_anchors = 2 [default = false];
+  optional SslVersion version_min = 3 [default = SSL3];
+  // optional SslVersion version_max = 4 [default = TLS1_2];
+  optional bool channel_id_enabled = 5 [default = true];
+  optional bool false_start_enabled = 6 [default = true];
+  optional bool signed_cert_timestamps_enabled = 7 [default = true];
+  optional bool require_forward_secrecy = 8 [default = false];
+  optional bool send_client_cert = 9 [default = false];
+  optional bool verify_ev_cert = 10 [default = false];
+  optional bool version_fallback = 11 [default = false];
+  optional bool cert_io_enabled = 12 [default = true];
+
+  // Maybe move this to SSL settings.
+  // optional int32 revocation_list_update_period = 2;
+  // optional string revocation_list_url = 3;
+}
+
+//message CertVerifier {
+//  optional bool use_custom = 1 [default = true];
+//}
+
+message HttpsRewrite {
+  optional bool enabled = 1 [default = true];
+  optional bool https_only = 2 [default = false];
+}
+
+message Filters {
+  optional bool clear_referrer = 1 [default = true];
+  optional bool inject_js = 2 [default = true];
+  optional bool blacklist_third_parties = 3 [default = true];
+  optional bool inject_css = 4 [default = true];
+}
+
+// TODO Break this apart: startup settings, and dynamic settings
+message AllSettings {
+  optional State state = 1;
+  optional WebPreferences web_preferences = 3;
+  optional Network network = 4;
+  optional SslConfig ssl_config = 5;
+  optional HttpsRewrite https_rewrite = 6;
+  optional Filters filters = 7;
+//  optional CertVerifier cert_verifier = 7;
+}

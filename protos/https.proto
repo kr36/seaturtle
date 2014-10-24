@@ -1,0 +1,18 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+
+package seaturtle.https;
+
+message Rule {
+  optional string from = 1;
+  optional string to = 2;
+}
+
+message RuleSet {
+  repeated string host = 1;
+  repeated Rule rule = 2;
+}
+
+message RuleList {
+  repeated RuleSet rule_set = 1;
+}

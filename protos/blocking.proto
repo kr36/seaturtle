@@ -1,0 +1,15 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+option java_package = "co.kr36.krypton.blocking";
+
+package seaturtle.blocking;
+
+message Rule {
+  optional string domain = 1;
+  optional bool block_third_party = 2;
+  optional string selector = 3;
+}
+
+message RuleList {
+  repeated Rule rule = 1;
+}

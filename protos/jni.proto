@@ -1,0 +1,291 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+option java_package = "co.kr36.krypton.jni";
+
+import "setting.proto";
+
+package seaturtle.jni;
+
+message ContextMenu {
+  optional string url = 1;
+  optional string content_url = 2;
+}
+
+message LaunchShellResponse {
+  optional sfixed64 native_shell = 2;
+  optional sfixed64 native_contents = 3;
+}
+
+// Keep these in their own namespace, so we can easily proguard protect them.
+message Render {
+  enum Type {
+    INVALID = 0;
+    ERROR = 1;
+    SCHEME = 2;
+  }
+  message Error {
+    optional string url = 1;
+    optional string error_domain = 2;
+    optional int32 reason = 3;
+    optional string localized_description = 4;
+  }
+  message Scheme {
+    optional string url = 1;
+  }
+  optional Type type = 1;
+  optional Error error = 2;
+  optional Scheme scheme = 3;
+}
+
+message LogEvent {
+  enum Type {
+    INVALID = 0;
+    REQUEST = 1;
+    COOKIE = 2;
+    FILE = 3;
+    LOCATION = 4;
+    SUB_RESOURCE_SSL_ERROR = 5;
+    POPUP = 6;
+  }
+  optional Type type = 1;
+  optional bool is_blocked = 2;
+  optional string description = 3;
+}
+
+message Log {
+  repeated LogEvent event = 1;
+}
+
+message HttpAuth {
+  optional sfixed64 native_object = 1;
+  optional bool is_cancel = 2;
+  optional string host = 3;
+  optional string realm = 4;
+}
+
+message HttpAuthResponse {
+  optional sfixed64 native_object = 1;
+  optional bool is_user_cancelled = 2;
+  optional string username = 3;
+  optional string password = 4;
+}
+
+
+message HttpFetchComplete {
+  optional sfixed64 id = 1;
+  optional int32 response = 2;
+  optional bytes content = 3;
+}
+
+message JavascriptDialog {
+  enum JsMessageType {
+    ALERT = 0;
+    CONFIRM = 1;
+    PROMPT = 2;
+    BEFORE_UNLOAD = 3;
+  }
+  optional sfixed64 native_web_contents = 1;
+  optional string url = 2;
+  optional string accept_lang = 3;
+  optional JsMessageType message_type = 4;
+  optional string text = 5;
+  optional string prompt = 6;
+  optional bool is_reload = 7; // for before unload
+}
+
+message JavascriptDialogClosed {
+  optional sfixed64 native_web_contents = 1;
+  optional bool success = 2;
+  optional string text = 3;
+}
+
+message CertificateError {
+  optional sfixed64 native_callback = 1;
+  optional int32 render_process_id = 2;
+  optional int32 render_frame_id = 3;
+  optional int32 cert_error = 4;
+  optional string url = 5;
+  optional string der_encoded_cert = 6;
+}
+
+message CertificateErrorResponse {
+  optional sfixed64 native_callback = 1;
+  optional bool allow = 2;
+}
+
+message SSLStatus {
+  optional bool is_insecure = 1;
+}
+
+message SSLDetails {
+  optional int32 bits = 1;
+  optional string ssl_version = 2;
+  optional string key_exchange = 3;
+  optional string cipher = 4;
+  optional string mac = 5;
+  optional bool is_aead = 6;
+}
+
+message DidFinishLoad {
+  optional string url = 1;
+  optional string title = 2;
+}
+
+message ShellCommand {
+  enum Command {
+    INVALID = 0;
+    IS_LOADING = 1;
+    PROGRESS = 2;
+    HIDE = 3;
+    CLOSE = 4;
+    CLEANUP = 5;
+    GET_LOG = 6;
+    GET_PARENT = 7;
+    LOAD_URL = 8;
+    RELOAD = 9;
+    GET_SSL_STATUS = 10;
+    GET_SSL_DETAILS = 11;
+    UPDATE_VISIBLE_URL = 12;
+    NOTIFY_LOG_EVENT = 13;
+    GET_VISIBLE_URL = 14;
+    DOWNLOAD_FAVICON = 15;
+    DID_FINISH_LOAD = 16;
+    NOTIFY_POPUP_OPENED = 17;
+  }
+  optional sfixed64 native_shell = 1;
+  optional Command command = 2;
+  optional bool is_loading = 3;
+  optional double progress = 5;
+  optional string url = 6;
+  optional bool override_user_agent = 7;
+  optional DidFinishLoad did_finish_load = 8;
+}
+
+message ShellCommandResponse {
+  optional sfixed64 parent_shell = 1;
+  optional SSLStatus ssl_status = 2;
+  optional SSLDetails ssl_details = 3;
+  optional Log log = 4;
+  optional string url = 5;
+}
+
+message ProxyConfig {
+  enum State {
+    PENDING = 0;
+    VALID = 1;
+  }
+  optional State state = 1 [default = PENDING];
+  optional string config = 2;
+}
+
+//message TitleUpdate {
+//  optional string url = 1;
+//  optional string title = 2;
+//}
+
+
+message Image {
+  enum Config {
+    ALPHA_8 = 0;
+    ARGB_4444 = 1;
+    ARGB_8888 = 2;
+    RGB_565 = 3;
+  }
+  optional int32 height = 1;
+  optional int32 width = 2;
+  optional Config config = 3;
+  optional bytes pixels = 4;
+}
+
+message FaviconDownloaded {
+  optional string url = 1;
+  optional Image image = 2;
+}
+
+message UpdateFavoritesResponse {
+  repeated string url = 1;
+}
+
+message ClearData {
+  optional bool everything = 1 [default = true];
+}
+
+message WhitelistedHost {
+  optional string host = 1;
+  repeated string path = 2;
+}
+
+message UpdateBlockingWhitelist {
+  repeated WhitelistedHost whitelisted_host = 1;
+}
+
+message Params {
+  enum Type {
+    INVALID = 0;
+    CONTEXT_MENU = 1;
+    LAUNCH_SHELL = 2;
+    LAUNCH_SHELL_RESPONSE = 3;    
+    START_DOWNLOAD = 4;
+    RENDER = 5;
+    RENDER_RESPONSE = 6;
+    UPDATE_BLOCKING_RULES = 7;
+    INTENT_URL = 8;
+    HTTP_AUTH = 9;
+    HTTP_AUTH_RESPONSE = 10;
+    HTTP_FETCH = 11;
+    HTTP_FETCH_RESPONSE = 12;
+    HTTP_FETCH_COMPLETE = 13;
+    JAVASCRIPT_DIALOG = 14;
+    JAVASCRIPT_DIALOG_CLOSED = 15;
+    CERTIFICATE_ERROR = 16;
+    CERTIFICATE_ERROR_RESPONSE = 17;
+    LOCALE = 18;
+    LOCALE_RESPONSE = 19;
+    ACCEPT_LANGS = 20;
+    ACCEPT_LANGS_RESPONSE = 21;
+    UPDATE_SETTINGS = 22;
+    SHELL_COMMAND = 23;
+    SHELL_COMMAND_RESPONSE = 24;
+    // SHELL_MANAGER = 27;
+    PROXY_CONFIG_CHANGED = 25;
+    PROXY_CONFIG_REQUEST = 26;
+    PROXY_CONFIG_RESPONSE = 27;
+    //TITLE_UPDATE = 28;
+    UPDATE_HTTPS_RULES = 28;
+    FAVICON_DOWNLOADED = 30;
+    UPDATE_FAVORITES_REQUEST = 31;
+    UPDATE_FAVORITES_RESPONSE = 32;
+    CLEAR_DATA = 33;
+    UPDATE_BLOCKING_WHITELIST = 34;
+  }
+  optional Type type = 1 [ default = INVALID ]; 
+  optional ContextMenu context_menu = 2;
+  optional sfixed64 launch_shell = 3; // parent shell
+  optional LaunchShellResponse launch_shell_response = 4;
+  optional string start_download = 5; // url
+  optional Render render = 6;
+  optional string render_response = 7; // html content
+  optional string update_blocking_rules = 9; // path
+  optional string intent_url = 10; // intent url
+  optional HttpAuth http_auth = 11;
+  optional HttpAuthResponse http_auth_response = 12;
+  optional string http_fetch = 13; // url
+  optional sfixed64 http_fetch_response = 14;  // id
+  optional HttpFetchComplete http_fetch_complete = 15;
+  optional JavascriptDialog javascript_dialog = 16;
+  optional JavascriptDialogClosed javascript_dialog_closed = 17;
+  optional CertificateError certificate_error = 18;
+  optional CertificateErrorResponse certificate_error_response = 19;
+  optional string locale = 21;
+  optional string accept_langs = 22;
+  optional seaturtle.settings.AllSettings update_settings = 23;
+  optional ShellCommand shell_command = 24;
+  optional ShellCommandResponse shell_command_response = 25;
+  optional ProxyConfig proxy_config = 27;
+  //optional TitleUpdate title_update = 28;
+  optional string update_https_rules = 28; // path
+  optional FaviconDownloaded favicon_downloaded = 30;
+  optional UpdateFavoritesResponse update_favorites_response = 31;
+  optional ClearData clear_data = 32;
+  optional UpdateBlockingWhitelist update_blocking_whitelist = 33;
+}
