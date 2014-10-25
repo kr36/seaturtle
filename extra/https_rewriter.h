@@ -7,6 +7,7 @@
 #define SEATURTLE_EXTRA_HTTPS_REWRITER_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "url/gurl.h"

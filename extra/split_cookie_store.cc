@@ -80,7 +80,7 @@ void SplitCookieStore::UpdateFavorites(
     STLOG() << "adding favorite: " << site.host() << " (" << url << ")";
     favorites_.insert(site.host());
   }
-  // TODO Cookie dance, move cookies between persistant_ and transient_
+  // TODO(cy) Cookie dance, move cookies between persistant_ and transient_
   // as nessecary.
 }
 
@@ -216,7 +216,7 @@ GURL SplitCookieStore::GetSiteForURL(const GURL& url) {
       rep.ClearPort();
       site = site.ReplaceComponents(rep);
     }
-  
+
     // If this URL has a registered domain, we only want to remember that part.
     std::string domain =
         net::registry_controlled_domains::GetDomainAndRegistry(

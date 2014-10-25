@@ -4,8 +4,8 @@
 
 #include "seaturtle/extra/https_rewriter.h"
 
-// TODO use c++11 regex, it supports ECMAscript syntax.
-//#include <regex>
+// TODO(cy) use c++11 regex, it supports ECMAscript syntax.
+// #include <regex>
 
 #include "base/file_util.h"
 #include "base/stl_util.h"
@@ -33,9 +33,9 @@ base::LazyInstance<HttpsRewriter> g_singleton = LAZY_INSTANCE_INITIALIZER;
 const char* kUserDataKey = "seaturtle-https-rewrite";
 
 class RewriteUserData : public base::SupportsUserData::Data {
-  public:
+ public:
     virtual ~RewriteUserData() {}
-    // TODO(ckatrak) switch to vector<>
+    // TODO(cy) switch to vector<>
     base::hash_set<std::string> prev_rewrites_;
 };
 
@@ -56,7 +56,7 @@ void DoRewrite(const std::string& rewrite,
     request->SetUserData(kUserDataKey, rud);
   }
   rud->prev_rewrites_.insert(request->url().spec());
-  // TODO(ckatrak) log an event
+  // TODO(cy) log an event
 }
 
 }  // namespace
@@ -77,7 +77,7 @@ void HttpsRewriter::UpdateRulesWithPath(const std::string& path) {
   CHECK(f.IsValid());
   {
     std::string raw;
-    CHECK(ReadFileToString(f, &raw));
+    CHECK(ReadFileToString(&f, &raw));
     if (raw.empty()) {
       STLOG() << "got empty rules file!";
     } else {
@@ -102,7 +102,7 @@ void HttpsRewriter::UpdateRules(const https::RuleList& rl) {
       const std::string& host = rs.host(j);
       size_t pos = host.find('*');
       if (pos == 0) {
-        // TODO(ckatrak) sort this out in the dat preprocessor
+        // TODO(cy) sort this out in the dat preprocessor
         std::string* super = new std::string(host, 2);
         // STLOG() << "adding ruleset for super host: " << *super;
         crs->hosts_.push_back(super);
@@ -128,10 +128,11 @@ HttpsRewriter::CompiledRuleSet::CompiledRuleSet(const RuleSet& rs) {
         new std::string(r.to()));
     CHECK(rr.first->ok()) << rr.first->error();
     std::string error;
-    // TODO(ckatrak) golang doesn't have a great way to handle this.
+    // TODO(cy) golang doesn't have a great way to handle this.
     // Keep an eye on these.
     if (!rr.first->CheckRewriteString(*(rr.second), &error)) {
-      STLOG() << "bad rewrite: " << error << " from: "<< r.from() << " to: " << r.to();
+      STLOG() << "bad rewrite: " << error << " from: "<< r.from()
+        << " to: " << r.to();
     }
     rules_.push_back(rr);
   }

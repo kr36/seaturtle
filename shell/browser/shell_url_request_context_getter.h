@@ -30,7 +30,7 @@ class ShellURLRequestContextGetter : public net::URLRequestContextGetter {
   virtual net::URLRequestContext* GetURLRequestContext() OVERRIDE;
   virtual scoped_refptr<base::SingleThreadTaskRunner>
       GetNetworkTaskRunner() const OVERRIDE;
-  
+
   net::HostResolver* host_resolver();
 
   static SplitCookieStore* GetSplitCookieStore();

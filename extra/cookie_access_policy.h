@@ -5,6 +5,8 @@
 #ifndef SEATURTLE_EXTRA_COOKIE_ACCESS_POLICY_H_
 #define SEATURTLE_EXTRA_COOKIE_ACCESS_POLICY_H_
 
+#include <string>
+
 #include "base/basictypes.h"
 #include "base/lazy_instance.h"
 #include "base/synchronization/lock.h"

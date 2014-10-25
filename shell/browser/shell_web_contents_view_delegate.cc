@@ -39,8 +39,9 @@ void ShellWebContentsViewDelegate::ShowContextMenu(
   }
 }
 
-::content::WebDragDestDelegate* ShellWebContentsViewDelegate::GetDragDestDelegate() {
- return NULL;
+::content::WebDragDestDelegate*
+    ShellWebContentsViewDelegate::GetDragDestDelegate() {
+  return NULL;
 }
 
 }  // namespace seaturtle

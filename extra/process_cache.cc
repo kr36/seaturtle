@@ -6,7 +6,6 @@
 
 #include "base/lazy_instance.h"
 
-#include "seaturtle/extra/process_cache.h"
 #include "seaturtle/jni/jni_bridge.h"
 
 using seaturtle::jni::Params;
@@ -46,4 +45,4 @@ std::string ProcessCache::GetAcceptLangs() {
   return accept_langs_;
 }
 
-} // namespace seaturtle
+}  // namespace seaturtle

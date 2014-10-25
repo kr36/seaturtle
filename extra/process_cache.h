@@ -5,24 +5,24 @@
 #ifndef SEATURTLE_EXTRA_PROCESS_CACHE_H_
 #define SEATURTLE_EXTRA_PROCESS_CACHE_H_
 
-#include "base/macros.h"
 #include <string>
+
+#include "base/macros.h"
 
 namespace seaturtle {
 
-// TODO Wait this is dumb. What would be smarter is to do this in jni_bridge.
-// You can just hold on the the response protos somewhere.
+// TODO(cy) Wait this is dumb. What would be smarter is to do this in
+// jni_bridge. You can just hold on the the response protos somewhere.
 class ProcessCache {
  public:
   static ProcessCache* Singleton();
 
-  ProcessCache() {};
-  virtual ~ProcessCache() {};
+  ProcessCache() {}
+  virtual ~ProcessCache() {}
   std::string GetAcceptLangs();
   std::string GetApplicationLocale();
 
  private:
-
   std::string locale_;
   std::string accept_langs_;
 

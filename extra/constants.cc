@@ -19,8 +19,8 @@ const char kKryptonScheme[] = "krypton";
 const char kBadUrlUrl[] = "krypton://bad-url";
 const char kBadUrlParam[] = "url";
 
-// WATCH update UA for each chromium update.
-// Youtube/Gmail stops working if you mess with this too much.
+//  WATCH update UA for each chromium update.
+//  Youtube/Gmail stops working if you mess with this too much.
 const char kUserAgentMobile[] =
   "Mozilla/5.0 (Linux; Android 4.4.4; NA Build/NA) "
   "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -31,4 +31,4 @@ const char kUserAgentDesktop[] =
   "Chrome/38.0.2125.102 Safari/537.36";
 
 const int kIdealFaviconSize = 48;
-} // namespace seaturtle
+}  // namespace seaturtle

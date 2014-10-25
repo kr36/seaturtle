@@ -4,6 +4,9 @@
 
 #include "seaturtle/extra/seaturtle_protocol_handler.h"
 
+#include <algorithm>
+#include <string>
+
 #include "base/bind.h"
 #include "base/memory/weak_ptr.h"
 #include "net/base/io_buffer.h"
@@ -50,8 +53,7 @@ class URLRequestSeaturtleJob : public URLRequestJob {
     int resp_length = resp_->render_response().size();
     if (bytes_already_read_ < resp_length) {
       *bytes_read = std::min(buf_size, resp_length);
-      strncpy(buf->data(),
-          resp_->render_response().data(),*bytes_read);
+      strncpy(buf->data(), resp_->render_response().data(), *bytes_read);
       bytes_already_read_ += *bytes_read;
     } else {
       *bytes_read = 0;
@@ -60,7 +62,7 @@ class URLRequestSeaturtleJob : public URLRequestJob {
   }
 
  protected:
-  virtual ~URLRequestSeaturtleJob() {};
+  virtual ~URLRequestSeaturtleJob() {}
 
  private:
   void StartAsync() {
@@ -80,7 +82,7 @@ class URLRequestSeaturtleJob : public URLRequestJob {
   scoped_ptr<Params> resp_;
 };
 
-}
+}  // namespace
 
 SeaturtleProtocolHandler::SeaturtleProtocolHandler() {
 }
@@ -90,7 +92,8 @@ URLRequestJob* SeaturtleProtocolHandler::MaybeCreateJob(
   return new URLRequestSeaturtleJob(request, network_delegate);
 }
 
-bool SeaturtleProtocolHandler::IsSafeRedirectTarget(const GURL& location) const {
+bool SeaturtleProtocolHandler::IsSafeRedirectTarget(
+    const GURL& location) const {
   return false;
 }
 

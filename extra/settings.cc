@@ -149,7 +149,7 @@ void UpdateWebPreferences(WebPreferences* p) {
   // v8_script_Streaming_Enabled
   COPY_SETTING(p, swp, cookie_enabled);
   p->pepper_accelerated_video_decode_enabled = false;
-  
+
   // ANDROID
   // text_autosizing_enabled
   // font_scale_factor
@@ -175,4 +175,4 @@ void UpdateWebPreferences(WebPreferences* p) {
   // report_screen_size_in_physical_pixels_quirk
 }
 
-} // namespace seaturtle
+}  // namespace seaturtle

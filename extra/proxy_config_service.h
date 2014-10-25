@@ -5,6 +5,8 @@
 #ifndef SEATURTLE_EXTRA_PROXY_CONFIG_SERVICE_H_
 #define SEATURTLE_EXTRA_PROXY_CONFIG_SERVICE_H_
 
+#include <vector>
+
 #include "base/macros.h"
 #include "base/observer_list.h"
 
@@ -19,7 +21,6 @@ class ProxyConfig;
 
 class ProxyConfigService :  public net::ProxyConfigService {
  public:
-  //explicit ProxyConfigService(base::SequencedTaskRunner* network_task_runner);
   ProxyConfigService();
   virtual ~ProxyConfigService();
 
@@ -27,7 +28,7 @@ class ProxyConfigService :  public net::ProxyConfigService {
   virtual void RemoveObserver(Observer* observer) OVERRIDE;
   virtual net::ProxyConfigService::ConfigAvailability GetLatestProxyConfig(
       net::ProxyConfig* config) OVERRIDE;
-  
+
   static void SetConfig(const jni::ProxyConfig& config);
  private:
   static void SetAllConfigsOnNetworkThread(const jni::ProxyConfig& config);
@@ -36,8 +37,6 @@ class ProxyConfigService :  public net::ProxyConfigService {
   void SetConfigOnNetworkThread(const jni::ProxyConfig& config);
   scoped_ptr<net::ProxyConfig> latest_;
   ObserverList<Observer> observers_;
-  //scoped_refptr<base::SequencedTaskRunner>
-  //  network_task_runner_;
   DISALLOW_COPY_AND_ASSIGN(ProxyConfigService);
 };
 

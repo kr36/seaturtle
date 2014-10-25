@@ -4,6 +4,8 @@
 
 #include "seaturtle/extra/ssl_config_service.h"
 
+#include <algorithm>
+
 #include "seaturtle/extra/base.h"
 #include "seaturtle/extra/settings.h"
 
@@ -12,7 +14,7 @@ using net::SSLConfig;
 namespace seaturtle {
 
 uint16 ToContentSslVersion(int protoSslVersion) {
-  switch(protoSslVersion) {
+  switch (protoSslVersion) {
     case settings::SslConfig::SSL3:
       return net::SSL_PROTOCOL_VERSION_SSL3;
     case settings::SslConfig::TLS1:
@@ -47,7 +49,6 @@ SSLConfigService::SSLConfigService() {
   static_config_.version_min =
     std::max(ToContentSslVersion(s.version_min()), net::kDefaultSSLVersionMin);
   static_config_.version_max = net::kDefaultSSLVersionMax;
-  // std::min(ToContentSslVersion(s.version_max()), net::kDefaultSSLVersionMax);
 }
 
 void SSLConfigService::GetSSLConfig(SSLConfig* config) {

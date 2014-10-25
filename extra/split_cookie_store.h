@@ -27,7 +27,7 @@ class  UpdateFavoritesResponse;
 
 class SplitCookieStore : public net::CookieStore {
  public:
-  SplitCookieStore(const base::FilePath& path);
+  explicit SplitCookieStore(const base::FilePath& path);
 
   virtual void SetCookieWithOptionsAsync(
       const GURL& url,

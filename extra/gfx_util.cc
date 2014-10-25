@@ -20,16 +20,16 @@ bool SkBitmapToProto(const SkBitmap& bitmap, Image* proto) {
   switch (bitmap.colorType()) {
     case kAlpha_8_SkColorType:
       config = Image::ALPHA_8;
-      break;  
+      break;
     case kARGB_4444_SkColorType:
       config = Image::ARGB_4444;
-      break;  
+      break;
     case kN32_SkColorType:
       config = Image::ARGB_8888;
-      break;  
+      break;
     case kRGB_565_SkColorType:
       config = Image::RGB_565;
-      break;  
+      break;
     case kUnknown_SkColorType:
     default:
       STLOG() << "invalid color type: " << bitmap.colorType();
@@ -39,7 +39,7 @@ bool SkBitmapToProto(const SkBitmap& bitmap, Image* proto) {
   proto->set_height(bitmap.height());
   proto->set_width(bitmap.width());
   proto->mutable_pixels()->assign(
-      (char*) bitmap.getPixels(), bitmap.getSafeSize());
+      reinterpret_cast<char*>(bitmap.getPixels()), bitmap.getSafeSize());
   return true;
 }
 

@@ -25,6 +25,6 @@ JNI_EXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 
   content::Compositor::Initialize();
   content::SetContentMainDelegate(new seaturtle::ShellMainDelegate());
- 
+
   return JNI_VERSION_1_4;
 }

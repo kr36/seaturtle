@@ -5,6 +5,8 @@
 #ifndef SEATURTLE_SHELL_BROWSER_SHELL_NETWORK_DELEGATE_H_
 #define SEATURTLE_SHELL_BROWSER_SHELL_NETWORK_DELEGATE_H_
 
+#include <string>
+
 #include "base/basictypes.h"
 #include "base/compiler_specific.h"
 #include "net/base/network_delegate.h"

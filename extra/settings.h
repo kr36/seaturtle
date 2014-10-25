@@ -5,9 +5,10 @@
 #ifndef SEATURTLE_EXTRA_SETTINGS_H_
 #define SEATURTLE_EXTRA_SETTINGS_H_
 
+#include <string>
+
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
-#include <string>
 
 // for convience
 #include "seaturtle/protos/setting.pb.h"
@@ -18,13 +19,13 @@
   seaturtle::settings::AllSettings* var = &st_global_settings_ref.get()->data;
 
 namespace content {
-  class WebPreferences;
+class WebPreferences;
 }
 
 namespace seaturtle {
 
 namespace settings {
-  class AllSettings;
+class AllSettings;
 }
 
 typedef base::RefCountedData<settings::AllSettings> RefCountedAllSettings;

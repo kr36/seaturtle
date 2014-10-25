@@ -43,7 +43,7 @@ void ShellContentRendererClient::GetNavigationErrorStrings(
       const blink::WebURLRequest& failed_request,
       const blink::WebURLError& error,
       std::string* error_html,
-      base::string16* error_description) { 
+      base::string16* error_description) {
   if (error_html != NULL) {
     jni::Params req;
     req.set_type(jni::Params::RENDER);

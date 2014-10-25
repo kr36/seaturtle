@@ -24,7 +24,7 @@ bool ShellResourceDispatcherHostDelegate::HandleExternalProtocol(
     int child_id,
     int route_id) {
   STLOG() << "HandleExternalProtocol " << url;
-  // TODO pass these in from java, use a set of strings
+  // TODO(cy) pass these in from java, use a set of strings
   // actually maybe just let java decide if it's going to handle it.
   // how often is this getting called?
   if (url.SchemeIs("intent")

@@ -10,7 +10,7 @@
 
 namespace seaturtle {
 
-// TODO this can probably be moved into shell.cc instead.
+// TODO(cy) this can probably be moved into shell.cc instead.
 class ShellWebContentsViewDelegate : public ::content::WebContentsViewDelegate {
  public:
   explicit ShellWebContentsViewDelegate(::content::WebContents* web_contents);
@@ -28,4 +28,4 @@ class ShellWebContentsViewDelegate : public ::content::WebContentsViewDelegate {
 
 }  // namespace seaturtle
 
-#endif // SEATURTLE_SHELL_BROWSER_SHELL_WEB_CONTENTS_VIEW_DELEGATE_H_
+#endif  // SEATURTLE_SHELL_BROWSER_SHELL_WEB_CONTENTS_VIEW_DELEGATE_H_

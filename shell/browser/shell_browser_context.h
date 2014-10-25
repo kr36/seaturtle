@@ -32,7 +32,8 @@ class ShellBrowserContext : public content::BrowserContext {
 
   virtual base::FilePath GetPath() const OVERRIDE;
   virtual bool IsOffTheRecord() const OVERRIDE;
-  virtual content::DownloadManagerDelegate* GetDownloadManagerDelegate() OVERRIDE;
+  virtual content::DownloadManagerDelegate*
+    GetDownloadManagerDelegate() OVERRIDE;
   virtual net::URLRequestContextGetter* GetRequestContext() OVERRIDE;
   virtual net::URLRequestContextGetter* GetRequestContextForRenderProcess(
       int renderer_child_id) OVERRIDE;

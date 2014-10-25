@@ -15,7 +15,7 @@ namespace seaturtle {
 // unconditionally cancel the download.
 class ShellDownloadManagerDelegate : public content::DownloadManagerDelegate {
  public:
-  virtual ~ShellDownloadManagerDelegate() {};
+  virtual ~ShellDownloadManagerDelegate() {}
 
   // content::DownloadManagerDelegate implementation.
   virtual bool DetermineDownloadTarget(

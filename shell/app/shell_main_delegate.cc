@@ -4,6 +4,8 @@
 
 #include "seaturtle/shell/app/shell_main_delegate.h"
 
+#include <string>
+
 #include "base/files/file.h"
 #include "base/files/file_path.h"
 #include "base/logging.h"

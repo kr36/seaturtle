@@ -75,7 +75,8 @@ void ProxyConfigService::SetConfigOnNetworkThread(
     const jni::ProxyConfig& config) {
   STDCHECK_ON_THREAD(IO);
   ProxyConfig* pc = NULL;
-  net::ProxyConfigService::ConfigAvailability state = net::ProxyConfigService::CONFIG_PENDING;
+  net::ProxyConfigService::ConfigAvailability state =
+    net::ProxyConfigService::CONFIG_PENDING;
   if (config.state() == jni::ProxyConfig::VALID) {
     state = net::ProxyConfigService::CONFIG_VALID;
     pc = new ProxyConfig();

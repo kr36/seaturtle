@@ -7,6 +7,7 @@
 #define SEATURTLE_BLOCK_BLOCKER_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "base/lazy_instance.h"
@@ -67,7 +68,7 @@ class Blocker {
  private:
   friend struct base::DefaultLazyInstanceTraits<Blocker>;
   Blocker();
-  void UpdateRules(base::File& f, bool is_browser_process);
+  void UpdateRules(base::File* f, bool is_browser_process);
 
   // Only used by browser process
   bool IsHostEvilThirdParty(const base::StringPiece& host) const;

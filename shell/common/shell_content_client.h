@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#ifndef SEATURTLE_SHELL_COMMON_SHELL_SEATURTLE_CLIENT_H_
-#define SEATURTLE_SHELL_COMMON_SHELL_SEATURTLE_CLIENT_H_
+#ifndef SEATURTLE_SHELL_COMMON_SHELL_CONTENT_CLIENT_H_
+#define SEATURTLE_SHELL_COMMON_SHELL_CONTENT_CLIENT_H_
 
 #include <string>
 #include <vector>
@@ -29,4 +29,4 @@ class ShellContentClient : public content::ContentClient {
 
 }  // namespace seaturtle
 
-#endif  // SEATURTLE_SHELL_COMMON_SHELL_SEATURTLE_CLIENT_H_
+#endif  // SEATURTLE_SHELL_COMMON_SHELL_CONTENT_CLIENT_H_

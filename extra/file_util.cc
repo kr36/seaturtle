@@ -9,15 +9,15 @@
 
 namespace seaturtle {
 
-bool ReadFileToString(base::File& file,
+bool ReadFileToString(base::File* file,
                       std::string* contents) {
   STDCHECK(contents);
   char buf[1 << 16];
   size_t len;
-  while ((len = file.ReadAtCurrentPos(buf, sizeof(buf))) > 0) {
+  while ((len = file->ReadAtCurrentPos(buf, sizeof(buf))) > 0) {
     contents->append(buf, len);
   }
-  file.Close();
+  file->Close();
   return len >= 0;
 }
 

@@ -4,6 +4,8 @@
 
 #include "seaturtle/shell/browser/shell_url_request_context_getter.h"
 
+#include <string>
+
 #include "base/file_util.h"
 #include "base/logging.h"
 #include "base/lazy_instance.h"
@@ -212,8 +214,7 @@ class SharedState {
     if (ua_settings_.get() == NULL) {
       ua_settings_.reset(new net::StaticHttpUserAgentSettings(
         net::HttpUtil::GenerateAcceptLanguageHeader(
-            ProcessCache::Singleton()->GetAcceptLangs()),
-        std::string()));
+            ProcessCache::Singleton()->GetAcceptLangs()), std::string()));
     }
     return ua_settings_.get();
   }
@@ -267,7 +268,7 @@ SplitCookieStore* ShellURLRequestContextGetter::GetSplitCookieStore() {
 net::URLRequestContext* ShellURLRequestContextGetter::GetURLRequestContext() {
   STDCHECK_ON_THREAD(IO);
   STLOG() << "GetURLRequestContext";
- 
+
   if (!url_request_context_) {
     STLOG() << "creating new request context: " << base_path_.value();
     ST_SETTINGS(settings);

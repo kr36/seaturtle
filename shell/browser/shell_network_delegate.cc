@@ -4,6 +4,8 @@
 
 #include "seaturtle/shell/browser/shell_network_delegate.h"
 
+#include <string>
+
 #include "base/files/file_path.h"
 #include "net/base/net_errors.h"
 #include "net/url_request/url_request.h"
@@ -54,7 +56,7 @@ int ShellNetworkDelegate::OnBeforeURLRequest(
   } else {
     // TODO(cy) Fuck, not sure why this still happens.
     // clicking and a Google search result hits this code path.
-   //  STNOTREACHED() << "no shell for request: " << request->url();
+    //  STNOTREACHED() << "no shell for request: " << request->url();
   }
   if (ret == net::OK) {
     if (b->ShouldClearReferrer()) {

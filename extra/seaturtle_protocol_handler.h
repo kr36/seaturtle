@@ -12,7 +12,8 @@
 namespace seaturtle {
 
 // Implements a ProtocolHandler for Seaturtle jobs.
-class SeaturtleProtocolHandler : public net::URLRequestJobFactory::ProtocolHandler {
+class SeaturtleProtocolHandler :
+    public net::URLRequestJobFactory::ProtocolHandler {
  public:
   SeaturtleProtocolHandler();
   virtual net::URLRequestJob* MaybeCreateJob(

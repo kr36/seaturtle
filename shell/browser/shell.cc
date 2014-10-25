@@ -423,7 +423,7 @@ void Shell::AddNewContents(WebContents* source,
 
   // TODO(cy) ugh... sort this out. Make it so we can open new contents
   // in our a separate context?
-  linked_ptr<ShellBrowserContext> owned_sbc; 
+  linked_ptr<ShellBrowserContext> owned_sbc;
   {
     ST_SETTINGS(settings);
     if (!settings->state().single_context()) {
@@ -599,7 +599,7 @@ void Shell::DidUpdateFaviconURL(
     for (size_t j = 0; j < f.icon_sizes.size(); j++) {
       const gfx::Size& s = f.icon_sizes[j];
       STLOG() << "favicon size: " << s.width() << "x" << s.height();
-      int current_size_diff = abs(kIdealFaviconSize - 
+      int current_size_diff = abs(kIdealFaviconSize -
           ((s.width() + s.height()) / 2));
       if (current_size_diff < best_size_diff) {
         best_candidate = &f.icon_url;

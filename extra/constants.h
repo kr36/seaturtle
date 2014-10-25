@@ -19,8 +19,7 @@ namespace seaturtle {
   // extern const char kUserAgentProduct[];
   extern const char kUserAgentMobile[];
   extern const char kUserAgentDesktop[];
-  
-  
+
   // Keep in sync /w java.
   extern const int kIdealFaviconSize;
 }  // namespace seaturtle

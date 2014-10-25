@@ -202,7 +202,7 @@ void ShellContentBrowserClient::AllowCertificateError(
   p.set_type(Params::CERTIFICATE_ERROR);
   CertificateError* ce = p.mutable_certificate_error();
   ce->set_native_callback(reinterpret_cast<intptr_t>(new AceCb(callback)));
-  ce->set_render_process_id(render_process_id); 
+  ce->set_render_process_id(render_process_id);
   ce->set_render_frame_id(render_frame_id);
   ce->set_cert_error(cert_error);
   ce->set_url(request_url.spec());

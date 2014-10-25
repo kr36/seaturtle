@@ -5,9 +5,7 @@ option java_package = "co.kr36.krypton.settings";
 package seaturtle.settings;
 
 message State {
-  // TODO this should apply to history, cache, cookies, hsts etc...
   optional int32 gc_period_days = 1 [default = 30];
-  // Applies to hsts db as well.
   optional int32 disk_cache_size_mb = 2 [default = 128];
 
   // TODO. Setting this to false falsifies the two options below for now.
@@ -25,7 +23,7 @@ message WebPreferences {
   optional bool remote_fonts_enabled = 5 [default = true];
   optional bool dns_prefetching_enabled = 6 [default = true];
   // TODO using false seems to break sites that use local storage.
-  // In particular scrolling stops working on this site, and some video embeds:
+  // In particular scrolling stops working on this site:
   // http://time.com/5590/leonardo-dicaprio-drugs/
   optional bool local_storage_enabled = 7 [default = true];
   optional bool databases_enabled = 8 [default = false];
@@ -51,11 +49,11 @@ message SslConfig {
     TLS1_1 = 2;
     TLS1_2 = 3;
   }
-  // TODO wtf, these don't seem to work
+  // TODO this setting seems to have no effect.
   optional bool rev_checking_enabled = 1 [default = false];
+  // TODO this setting seems to have no effect.
   optional bool rev_checking_required_local_anchors = 2 [default = false];
   optional SslVersion version_min = 3 [default = SSL3];
-  // optional SslVersion version_max = 4 [default = TLS1_2];
   optional bool channel_id_enabled = 5 [default = true];
   optional bool false_start_enabled = 6 [default = true];
   optional bool signed_cert_timestamps_enabled = 7 [default = true];
@@ -64,10 +62,6 @@ message SslConfig {
   optional bool verify_ev_cert = 10 [default = false];
   optional bool version_fallback = 11 [default = false];
   optional bool cert_io_enabled = 12 [default = true];
-
-  // Maybe move this to SSL settings.
-  // optional int32 revocation_list_update_period = 2;
-  // optional string revocation_list_url = 3;
 }
 
 //message CertVerifier {

@@ -12,7 +12,7 @@ namespace seaturtle {
 namespace jni {
 
 void Initialize();
-void Invoke(const Params& req, Params* resp=NULL);
+void Invoke(const Params& req, Params* resp = NULL);
 
 }  // namespace jni
 }  // namespace seaturtle

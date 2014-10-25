@@ -6,6 +6,7 @@
 #define SEATURTLE_SHELL_BROWSER_SHELL_CONTENT_BROWSER_CLIENT_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "base/compiler_specific.h"
@@ -65,7 +66,8 @@ class ShellContentBrowserClient : public content::ContentBrowserClient {
   virtual content::WebContentsViewDelegate* GetWebContentsViewDelegate(
       content::WebContents* web_contents) OVERRIDE;
 
-  virtual content::QuotaPermissionContext* CreateQuotaPermissionContext() OVERRIDE;
+  virtual content::QuotaPermissionContext*
+      CreateQuotaPermissionContext() OVERRIDE;
 
   virtual void GetAdditionalMappedFilesForChildProcess(
       const base::CommandLine& command_line,

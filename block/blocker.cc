@@ -115,16 +115,16 @@ void Blocker::UpdateRulesWithPath(const std::string& path) {
   file.Initialize(FilePath::FromUTF8Unsafe(path),
       base::File::FLAG_OPEN | base::File::FLAG_READ);
   CHECK(file.IsValid());
-  UpdateRules(file, true);
+  UpdateRules(&file, true);
 }
 
 void Blocker::UpdateRulesWithFd(int fd) {
   base::File file(fd);
   STDCHECK(file.IsValid());
-  UpdateRules(file, false);
+  UpdateRules(&file, false);
 }
 
-void Blocker::UpdateRules(base::File& f, bool is_browser_process) {
+void Blocker::UpdateRules(base::File* f, bool is_browser_process) {
   RuleList rl;
   {
     std::string raw_rules;
@@ -255,7 +255,7 @@ void Blocker::UpdateRulesForRenderProcess(const RuleList& rl) {
 void Blocker::InjectStyleSheets(blink::WebFrame* frame) const {
   STLOG() << "injecting stylesheets";
   // Insert globals.
-  for (unsigned int i = 0; i < global_stylesheets_.size(); i++){
+  for (size_t i = 0; i < global_stylesheets_.size(); i++) {
     frame->document().insertStyleSheet(global_stylesheets_[i]);
   }
   // Build a domain specific stylesheet.

@@ -5,6 +5,8 @@
 #ifndef SEATURTLE_SHELL_APP_SHELL_MAIN_DELEGATE_H_
 #define SEATURTLE_SHELL_APP_SHELL_MAIN_DELEGATE_H_
 
+#include <string>
+
 #include "base/memory/scoped_ptr.h"
 #include "content/public/app/content_main_delegate.h"
 #include "seaturtle/shell/common/shell_content_client.h"
@@ -46,4 +48,4 @@ class ShellMainDelegate : public content::ContentMainDelegate {
 };
 
 }  // namespace seaturtle
-#endif // SEATURTLE_SHELL_APP_SHELL_MAIN_DELEGATE_H_
+#endif  // SEATURTLE_SHELL_APP_SHELL_MAIN_DELEGATE_H_

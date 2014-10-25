@@ -38,7 +38,7 @@ namespace {
 
 class ShellBrowserContext::ShellResourceContext : public ResourceContext {
  public:
-  ShellResourceContext(ShellBrowserContext* sbc) : sbc_(sbc) {}
+  explicit ShellResourceContext(ShellBrowserContext* sbc) : sbc_(sbc) {}
   virtual ~ShellResourceContext() {}
 
   // ResourceContext implementation:
