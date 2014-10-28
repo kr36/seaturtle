@@ -1,0 +1,25 @@
+diff --git a/build/all.gyp b/build/all.gyp
+index e4448b4..b5d0ccc 100644
+--- a/build/all.gyp
++++ b/build/all.gyp
+@@ -45,6 +45,8 @@
+         }],
+         ['OS=="android"', {
+           'dependencies': [
++            # Note this is in teh android section
++            '../seaturtle/seaturtle.gyp:seaturtlegyp_apk',
+             '../content/content_shell_and_tests.gyp:content_shell_apk',
+             '../mojo/mojo.gyp:mojo_shell_apk',
+             '../mojo/mojo_base.gyp:mojo_test_apk',
+diff --git a/ipc/ipc_message_start.h b/ipc/ipc_message_start.h
+index bcfcf7c..98a2948 100644
+--- a/ipc/ipc_message_start.h
++++ b/ipc/ipc_message_start.h
+@@ -106,6 +106,7 @@ enum IPCMessageStart {
+   OzoneGpuMsgStart,
+   ChromeUtilityExtensionsMsgStart,
+   PlatformNotificationMsgStart,
++  SeaturtleMsgStart,
+   LastIPCMsgStart  // Must come last.
+ };
+ 
