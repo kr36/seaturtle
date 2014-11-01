@@ -2,7 +2,7 @@
 
 WARNING: Seaturtle is still beta software. Exercise caution while using.
 
-Seaturtle is the core component of the Krypton and Krypton Anonymous web browsers. It supplements the [Chromium Content module](http://www.chromium.org/developers/content-module) with configurable privacy and anonymity enhancements. Currently, libseaturtle only targets Android platforms.
+Seaturtle is the core component of the Krypton web browser. It supplements the [Chromium Content module](http://www.chromium.org/developers/content-module) with configurable privacy and anonymity enhancements. Currently, libseaturtle only targets Android platforms.
 
 The goal of this project is to provide the building blocks for a cross platform browser with easily configurable privacy features comparable to the [Tor Browser](https://www.torproject.org/projects/torbrowser/design/).
 
@@ -10,7 +10,7 @@ Krypton Anonymous on Play Store:
 
 *[![Play Store Badge](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=co.kr36.krypton.x)*
 
-Krypton on Play Store:
+Krypton Premium on Play Store:
 
 *[![Play Store Badge](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=co.kr36.krypton.r)*
 
@@ -24,8 +24,7 @@ Krypton on Play Store:
 
 4. From the src directory:
 
-```source ./build/android/envsetup.sh
-ninja -C out/Release seaturtlegyp_apk```
+```source ./build/android/envsetup.sh && ninja -C out/Release seaturtlegyp_apk```
 
 ## Relevant Reading
 
