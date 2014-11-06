@@ -257,6 +257,7 @@ message Params {
     UPDATE_FAVORITES_RESPONSE = 32;
     CLEAR_DATA = 33;
     UPDATE_BLOCKING_WHITELIST = 34;
+    EXIT_FULLSCREEN_MODE = 35;
   }
   optional Type type = 1 [ default = INVALID ]; 
   optional ContextMenu context_menu = 2;

@@ -96,6 +96,10 @@ class Shell : public content::WebContentsDelegate,
   virtual void DidUpdateFaviconURL(
       const std::vector<content::FaviconURL>& candidates) OVERRIDE;
 
+  virtual void ToggleFullscreenModeForTab(content::WebContents* web_contents,
+                                          bool enter_fullscreen) OVERRIDE;
+  virtual bool IsFullscreenForTabOrPending(
+      const content::WebContents* web_contents) const;
   // TODO(cy): RendererUnresponsive WorkerCrashed?
   // implement activate/deactivate contents ?
   // Handle context menu, title was set "
@@ -132,6 +136,7 @@ class Shell : public content::WebContentsDelegate,
   scoped_ptr<ShellJavaScriptDialogManager> jdm_;
   scoped_ptr<content::WebContents> wc_;
   scoped_refptr<content::SiteInstance> si_;
+  bool is_fullscreen_;
 
   intptr_t parent_shell_;
 };

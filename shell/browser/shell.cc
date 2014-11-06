@@ -61,7 +61,8 @@ std::vector<Shell*> Shell::all_shells_;
 Shell::Shell(WebContents* web_contents) :
   content::WebContentsObserver(web_contents),
   wc_(web_contents),
-  si_(web_contents->GetSiteInstance()) {
+  si_(web_contents->GetSiteInstance()),
+  is_fullscreen_(false) {
   all_shells_.push_back(this);
 }
 
@@ -640,6 +641,23 @@ void Shell::UpdateWebPreferences() {
   seaturtle::UpdateWebPreferences(&wp);
   rvh->UpdateWebkitPreferences(wp);
 }
+
+void Shell::ToggleFullscreenModeForTab(WebContents* web_contents,
+                                       bool enter_fullscreen) {
+  STLOG() << "toggle fullscreen mode for tab " << enter_fullscreen;
+  is_fullscreen_ = enter_fullscreen;
+  if (!enter_fullscreen) {
+    Params p;
+    p.set_type(Params::EXIT_FULLSCREEN_MODE);
+    jni::Invoke(p);
+  }
+}
+
+bool Shell::IsFullscreenForTabOrPending(
+    const WebContents* web_contents) const {
+  return is_fullscreen_;
+}
+// CY YOU WHERE HERE, IMPLEMENT THE OTHER FUNC
 
 // static
 void Shell::FaviconDownloaded(const GURL& site_url, int id, int status,
