@@ -24,6 +24,8 @@
 #include "content/public/common/favicon_url.h"
 #include "content/public/common/web_preferences.h"
 
+#include "third_party/WebKit/public/web/WebFindOptions.h"
+
 #include "seaturtle/extra/base.h"
 #include "seaturtle/extra/settings.h"
 #include "seaturtle/extra/shell_messages.h"
@@ -35,6 +37,8 @@
 #include "seaturtle/shell/browser/shell_content_browser_client.h"
 #include "seaturtle/shell/browser/shell_javascript_dialog_manager.h"
 
+
+using blink::WebFindOptions;
 using net::URLRequest;
 using content::NavigationController;
 using content::WebContents;
@@ -385,6 +389,9 @@ jni::Params* Shell::HandleShellCommand(const ShellCommand& sc) {
     case ShellCommand::DOWNLOAD_FAVICON:
       DownloadFavicon();
       break;
+    case ShellCommand::FIND_IN_PAGE:
+      FindInPage(sc.find_in_page());
+      break;
     default:
       // if this ever fires, return a code to java and dump the stack.
       STNOTREACHED() << "unknown shell command " << sc.command();
@@ -657,7 +664,23 @@ bool Shell::IsFullscreenForTabOrPending(
     const WebContents* web_contents) const {
   return is_fullscreen_;
 }
-// CY YOU WHERE HERE, IMPLEMENT THE OTHER FUNC
+
+void Shell::FindInPage(const jni::FindInPage& fip) {
+  STLOG() << "FindInPage: " << fip.id() << " " << fip.stop() << " "
+    << fip.query();
+  if (fip.stop()) {
+    web_contents()->StopFinding(content::STOP_FIND_ACTION_CLEAR_SELECTION);
+  }
+  if (fip.query().empty()) {
+    return;
+  }
+  WebFindOptions options;
+  options.forward = fip.forward();
+  options.matchCase = false;
+  options.wordStart = false;
+  options.findNext = fip.find_next();
+  wc_->Find(fip.id(), base::UTF8ToUTF16(fip.query()), options); 
+}
 
 // static
 void Shell::FaviconDownloaded(const GURL& site_url, int id, int status,

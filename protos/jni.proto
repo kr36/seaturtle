@@ -131,6 +131,14 @@ message DidFinishLoad {
   optional string title = 2;
 }
 
+message FindInPage {
+  optional int32 id = 1;
+  optional bool stop = 2;
+  optional string query = 3;
+  optional bool forward = 4;
+  optional bool find_next = 5;
+}
+
 message ShellCommand {
   enum Command {
     INVALID = 0;
@@ -151,6 +159,7 @@ message ShellCommand {
     DOWNLOAD_FAVICON = 15;
     DID_FINISH_LOAD = 16;
     NOTIFY_POPUP_OPENED = 17;
+    FIND_IN_PAGE = 18;
   }
   optional sfixed64 native_shell = 1;
   optional Command command = 2;
@@ -159,6 +168,7 @@ message ShellCommand {
   optional string url = 6;
   optional bool override_user_agent = 7;
   optional DidFinishLoad did_finish_load = 8;
+  optional FindInPage find_in_page = 9;
 }
 
 message ShellCommandResponse {
@@ -229,7 +239,6 @@ message Params {
     RENDER = 5;
     RENDER_RESPONSE = 6;
     UPDATE_BLOCKING_RULES = 7;
-    INTENT_URL = 8;
     HTTP_AUTH = 9;
     HTTP_AUTH_RESPONSE = 10;
     HTTP_FETCH = 11;
@@ -258,6 +267,8 @@ message Params {
     CLEAR_DATA = 33;
     UPDATE_BLOCKING_WHITELIST = 34;
     EXIT_FULLSCREEN_MODE = 35;
+    INTENT_URL = 8;
+    INTENT_URL_RESPONSE = 36;
   }
   optional Type type = 1 [ default = INVALID ]; 
   optional ContextMenu context_menu = 2;
@@ -267,7 +278,6 @@ message Params {
   optional Render render = 6;
   optional string render_response = 7; // html content
   optional string update_blocking_rules = 9; // path
-  optional string intent_url = 10; // intent url
   optional HttpAuth http_auth = 11;
   optional HttpAuthResponse http_auth_response = 12;
   optional string http_fetch = 13; // url
@@ -289,4 +299,6 @@ message Params {
   optional UpdateFavoritesResponse update_favorites_response = 31;
   optional ClearData clear_data = 32;
   optional UpdateBlockingWhitelist update_blocking_whitelist = 33;
+  optional string intent_url = 10; // intent url
+  optional bool intent_url_response = 34; // true if we found a handler app
 }

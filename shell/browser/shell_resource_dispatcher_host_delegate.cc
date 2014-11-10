@@ -36,8 +36,9 @@ bool ShellResourceDispatcherHostDelegate::HandleExternalProtocol(
     jni::Params p;
     p.set_type(jni::Params::INTENT_URL);
     p.set_intent_url(url.spec());
-    jni::Invoke(p);
-    return true;
+    jni::Params resp;
+    jni::Invoke(p, &resp);
+    return resp.intent_url_response();
   }
   return false;
 }

@@ -42,6 +42,7 @@ namespace jni {
 class Params;
 class ShellCommand;
 class ShellCommandResponse;
+class FindInPage;
 }  // namespace jni
 
 class Shell : public content::WebContentsDelegate,
@@ -126,7 +127,7 @@ class Shell : public content::WebContentsDelegate,
   void Load(const std::string& surl, bool as_desktop);
   void Reload(bool as_desktop);
   void UpdateWebPreferences();
-
+  void FindInPage(const jni::FindInPage& fip);
 
   scoped_ptr<GURL> favicon_candidate_;
   base::Lock log_lock_;  // TODO(cy) RW lock?
